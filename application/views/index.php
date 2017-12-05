@@ -60,8 +60,7 @@ function resizeText() {
         <!--Header_section-->         
         <header id="header_outer"> 
             <div class="container"> 
-                <div class="header_section"> 
-                                         
+                <div class="header_section">               
                     <nav class="nav" id="nav"> 
                         <ul>                                                           
                             <?php 
@@ -106,11 +105,10 @@ function resizeText() {
                                 <div class="top_left_cont flipInY wow animated"> 
                                     <h3>Print tidak pernah semudah ini</h3> 
                                     <h2>Tugas tidak terasa sulit dengan print online</h2> 
-                                    <a href="#service" class="learn_more2"><font color="#888888" face="Lato"></font>Lebih lanjut</a>
+                                    <a href="<?php echo base_url('display/login');?>" class="learn_more2"><font color="#888888" face="Lato"></font>Login</a>
                                 </div>                                 
                             </div>                             
                             <div class="col-lg-7 col-sm-5"> </div>   
-
                         </div>                         
                     </div>                     
                 </div>                 
@@ -143,8 +141,21 @@ function resizeText() {
 
         <section class="print">
 <div class="container">
+ <?php foreach ($admin as $l){?>
+<div class="col-md-4">
+        <div class="card" style="width: 20rem;">
+        <div class="img">
+          <img style="max-height: 170px;" class="card-img-top" src="<?php echo $l['vendor'] ?>" alt="Card image cap">
+        </div>                   
+          <div class="card-body">
+          <h4 class="card-title"><?php echo $l['nama_lapangan'] ?></h4>
+          <p class="card-text">Tarif Mahasiswa: <?php echo $l['tarif_mahasiswa'] ?></p>
+          <p class="card-text">Tarif Non ITS: <?php echo $l['tarif_nonits'] ?></p>
+          <a href="<?php echo base_url('lapangan/detail/'.$l["id_lapangan"]) ?>" class="btn btn-primary">Detail</a>
+          </div>
+        </div>           
+      </div><?php } ?>
 
-<a>aaa</a>
 
           <img style="max-height: 170px;" class="card-img-top" src="assets/img/toko1" >
         </div>      
