@@ -1,8 +1,8 @@
 <?php
-class Admin extends CI_Controller {
+class Vendor extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('Admin_model');
+		$this->load->model('Vendor_model');
 		$this->load->library('session');
 		$this->load->helper('download');
 		$this->load->library('form_validation');
@@ -21,32 +21,32 @@ class Admin extends CI_Controller {
 
 		if($this->form_validation->run()==false)
 		{
-			redirect('display/loginadmin');
+			redirect('display/loginvendor');
 		}
 		else
 		{
 
 		$username = html_escape($this->input->post('username', TRUE));
-		$pass = html_escape(sha1($this->input->post('pass', TRUE)));
-		$isLogin = $this->Admin_model->login_authenAdmin($username, $pass);
-		$read = $this->Admin_model->getDataAdmin($username);
+		$pass = html_escape($this->input->post('pass', TRUE));
+		$isLogin = $this->Vendor_model->login_authenVendor($username, $pass);
+		$read = $this->Vendor_model->getDataVendor($username);
 
-		$i = $this->Admin_model->authen_admin($username);
+		$i = $this->Vendor_model->authen_vendor($username);
 		}
 
 		if ($isLogin == true) {
 			$this->session->set_userdata('username', $username);
 			$this->session->set_userdata('status', 'siap');
-			$this->load->view('admin/dashboardadmin');
+			$this->load->view('vendor/dashboardvendor');
 		}
 		else {
 			$error = 'error_message';
-			$this->load->view('admin/loginadmin', $error);
+			$this->load->view('vendor/loginvendor', $error);
 		}
 		$this->session();
 	}
 
-	function addAdmin() {
+	function addVendor() {
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'pass', 'required');
 		$this->form_validation->set_rules('password2', 'pass', 'required');
@@ -54,14 +54,14 @@ class Admin extends CI_Controller {
 		
 
 		if($this->form_validation->run() == false){
-			redirect('Admin/tambahAdmin');
+			redirect('Vendor/tambahVendor');
 		}
 		else{
 			$pass = html_escape(sha1($this->input->post('password', TRUE)));
 			$pass2 = html_escape(sha1($this->input->post('password2', TRUE)));
 			if ($pass != $pass2) {
 			$data['err_message'] = "Password tidak cocok!";
-			redirect('Admin/tambahAdmin');
+			redirect('Vendor/tambahVendor');
 		} else {
 
 		$data = array(
@@ -69,35 +69,35 @@ class Admin extends CI_Controller {
 			'pass' => html_escape(sha1($this->input->post('password', TRUE)))
 			);
 		
-		$this->Admin_model->addAdmindata($data);
-		$this->load->view('admin/dashboardadmin');
+		$this->Vendor_model->addVendordata($data);
+		$this->load->view('vendor/dashboardvendor');
 		}
 		}
-
-		
-
-		
 	}
 
 	function logout(){
-		$this->session->unset_userdata('status');
 		$this->session->sess_destroy();
-		redirect(); }
+		//redirect();}
+		$this->load->view('vendor/loginvendor');
+	}
+		// $this->session->unset_userdata('status');
+		// $this->session->sess_destroy();
+		// redirect(); }
 
 	function readData() {
 		$this->session();
-		$data = $this->Admin_model->getData();
-		$this->load->view('admin/datauser', array('data' => $data));
+		$data = $this->Vendor_model->getData();
+		$this->load->view('vendor/datauser', array('data' => $data));
 	}
 
 	function readData2() {
 		$this->session();
-		$data = $this->Admin_model->getDataAdmin2();
-		$this->load->view('admin/dataadmin', array('data' => $data));
+		$data = $this->Vendor_model->getDataVendor2();
+		$this->load->view('vendor/datavendor', array('data' => $data));
 	}
 /*
 	function downloadFile(){
-		$data = $this->Admin_model->getFile($id);
+		$data = $this->Vendor_model->getFile($id);
 		foreach ($data as $r) {
 			$file = $r['file'];
 		}
@@ -109,67 +109,67 @@ class Admin extends CI_Controller {
 */
 	function hapus($delete){
 		$this->session();
-		$this->Admin_model->hapus($delete);
+		$this->Vendor_model->hapus($delete);
 		$this->dataHistory();
 	}
 
-	function hapusAdmin($delete){
+	function hapusVendor($delete){
 		$this->session();
-		$this->Admin_model->hapusAdmin($delete);
+		$this->Vendor_model->hapusVendor($delete);
 		$this->readData2();
 	}
 
-	// function delete_admin($item){
+	// function delete_vendor($item){
 	// 	$this->session();
 	// 	$this->db->where_in('username', $item);
-	// 	$this->db->delete('admin');
+	// 	$this->db->delete('vendor');
 	// }
 
 	function dataHistory() {
 		$this->session();
-		$data = $this->Admin_model->getDataHistory();
-		$this->load->view('admin/historyadmin', array('data' => $data));
+		$data = $this->Vendor_model->getDataHistory();
+		$this->load->view('vendor/historyvendor', array('data' => $data));
 	}
 
-	function dataAdmin() {
+	function dataVendor() {
 		$this->session();
-		$data = $this->Admin_model->getDataAdmin2();
-		$this->load->view('admin/dataadmin', array('data' => $data));
+		$data = $this->Vendor_model->getDataVendor2();
+		$this->load->view('vendor/datavendor', array('data' => $data));
 	}
 
-	function dashboardadmin(){
+	function dashboardvendor(){
 		$this->session();
-		$this->load->view('admin/dashboardadmin');
+		$this->load->view('vendor/dashboardvendor');
 		$data['err_message'] = "";
 	}
 
 	function datauser(){
 		$this->session();
-		$this->load->view('admin/datauser');
+		$this->load->view('vendor/datauser');
 		$data['err_message'] = "";
 	}
 
 	function showUpdateorder(){
 		$this->session();
-		$this->load->view('admin/updateorder');
+		$this->load->view('vendor/updateorder');
 		$data['err_message'] = "";
 	}
 
-	function historyadmin(){
+	function historyvendor(){
 		$this->session();
-		$this->load->view('admin/historyadmin', array('data'=>$data));
+		$this->load->view('vendor/historyvendor', array('data'=>$data));
 		$data['err_message']="";
 	}
 
-	function tambahAdmin(){
+	function tambahVendor(){
 		$this->session();
-		$this->load->view('admin/addadmin');
+		$this->load->view('vendor/addvendor');
 		$data['err_message'] = "";
 	}
 
 	function update($baru) {
 		$this->session();
-		$data = $this->Admin_model->getItem($baru);
+		$data = $this->Vendor_model->getItem($baru);
 		$item = array (
 			'id' => $data[0]['id'],
 			'email' => $data[0]['email'],
@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
 			'file' => $data[0]['file'],
 			'status' => $data[0]['status']
 		);		
-		$this->load->view('admin/updateorder', $item);
+		$this->load->view('vendor/updateorder', $item);
 	}
 
 
@@ -187,13 +187,13 @@ class Admin extends CI_Controller {
 		$this->session();
 		$status = html_escape($this->input->post('status', TRUE));		
 		$id = html_escape($this->input->post('id', TRUE));
-		$data = $this->Admin_model->getItem($id);
+		$data = $this->Vendor_model->getItem($id);
 
 		$update = array(
 			'status' => 'hatma'
 		);
 		
-		$this->Admin_model->Update($update, $id);
+		$this->Vendor_model->Update($update, $id);
 		$this->dataHistory();
 	}
 
@@ -201,19 +201,19 @@ class Admin extends CI_Controller {
 	// 	$this->session();
 	// 	$authentication = html_escape($this->input->post('authentication'));		
 	// 	$email = html_escape($this->input->post('email'));
-	// 	$data = $this->Admin_model->getUser($email);
+	// 	$data = $this->Vendor_model->getUser($email);
 		
 	// 	$update = array(
 	// 		'authentication' => html_escape($this->input->post('authentication'))
 	// 	);
 		
-	// 	$this->Admin_model->updateUser($update, $email);
+	// 	$this->Vendor_model->updateUser($update, $email);
 	// 	$this->readData();
 	// }
 
 	function updateDataUser($baru) {
 		$this->session();
-		$data = $this->Admin_model->getUser($baru);
+		$data = $this->Vendor_model->getUser($baru);
 		$item = array (
 			'nama' => $data[0]['nama'],
 			'nohandphone' => $data[0]['nohandphone'],
@@ -221,7 +221,7 @@ class Admin extends CI_Controller {
 			'password' => $data[0]['password'],
 			'authentication' => $data[0]['authentication']
 		);		
-		$this->load->view('admin/updatedatauser', $item);
+		$this->load->view('vendor/updatedatauser', $item);
 	}
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-class Vendor_model extends CI_Model {
+class Admin_model extends CI_Model {
 
 	function getData() {
 		$query = $this->db->get('userdata');
@@ -24,26 +24,26 @@ class Vendor_model extends CI_Model {
 	}
 */
 	//Untuk Login
-	function getDataVendor($username) {
+	function getDataAdmin($username) {
 		$this->db->select('*');
 		$this->db->where('username', $username);
-		$this->db->from('Vendor');
+		$this->db->from('admin');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
-	function getDataVendor2() {
-		$query = $this->db->get('vendor');
+	function getDataAdmin2() {
+		$query = $this->db->get('admin');
 		return $query->result_array();
 		// referensi query result:
 		// https://www.codeigniter.com/userguide3/database/results.html
 	}
 
-	function login_authenVendor($username, $pass){
+	function login_authenAdmin($username, $pass){
 		$this->db->select('*');
 		$this->db->where('username', $username);
 		$this->db->where('pass', $pass);
-		$this->db->from('vendor');
+		$this->db->from('admin');
 		$query = $this->db->get();
 		
 		if ($query->num_rows() == 1) {
@@ -53,18 +53,18 @@ class Vendor_model extends CI_Model {
 		}
 	}
 
-	function authen_vendor($username) {
+	function authen_admin($username) {
 		$this->db->select('authentication');
 		$this->db->where('username', $username);
-		$this->db->from('vendor');
+		$this->db->from('admin');
 		$query = $this->db->get();
 		return $query->result_array();
 	}
 
-	/*function wrong_passwordVendor($username, $value){
+	/*function wrong_passwordAdmin($username, $value){
 		$this->db->set('authentication', $value);
 		$this->db->where('username', $username);
-		$this->db->update('vendor');
+		$this->db->update('admin');
 	}*/
 
 	function hapus($data){
@@ -72,14 +72,14 @@ class Vendor_model extends CI_Model {
 		$this->db->delete('order_masuk');
 	}
 
-	function hapusVendor($data){
+	function hapusAdmin($data){
 		$this->db->where('username', $data);
-		$this->db->delete('vendor');
+		$this->db->delete('admin');
 	}
 
-	function addVendordata($data) {
-		$this->db->insert('vendor', $data);
-		//insert $data ke tabel vendor
+	function addAdmindata($data) {
+		$this->db->insert('admin', $data);
+		//insert $data ke tabel admin
 	}
 
 	function getItem($data) {
@@ -117,7 +117,7 @@ class Vendor_model extends CI_Model {
 
 	//Line below for testing purposes
 	public function testing_purpose1(){
-			$test = $this->db->get('vendor');
+			$test = $this->db->get('admin');
 			return $test->num_rows();
 		}
 
@@ -128,7 +128,7 @@ class Vendor_model extends CI_Model {
 
 	public function testing_purpose_find($username){
 		$result = $this->db->where('username', $username)
-						   ->get('vendor');
+						   ->get('admin');
 		return $this->db->affected_rows();
 	}
 
@@ -141,7 +141,7 @@ class Vendor_model extends CI_Model {
 
 	public function find_testing_akun($username) {
 		$result = $this->db->where('username', $username)
-						   ->get('vendor');
+						   ->get('admin');
 		return $result->row_array();
 	}
 
@@ -159,9 +159,9 @@ class Vendor_model extends CI_Model {
         'authentication' => '0',
     ];
         $hasil = $this->db->where('username',$username)
-        		 ->get('vendor');
+        		 ->get('admin');
         if($hasil->num_rows==0){
-        	$this->db->insert('vendor', $data);
+        	$this->db->insert('admin', $data);
         }
         else return false;
 	}

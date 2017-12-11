@@ -1,10 +1,9 @@
-
 <!doctype html> 
 <html> 
     <head> 
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, maximum-scale=1"> 
-        <title>Print-in - Halaman Cetak</title>         
+        <title>Print-in - Dashboard</title>         
         <link rel="icon" href="favicon.png" type="image/png"> 
         <link href="<?php echo base_url ('assets/css/bootstrap.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/style.css') ?>" rel="stylesheet" type="text/css">
@@ -57,25 +56,20 @@ function resizeText() {
 }
 </script>         
     </head>     
-    <body>
-        <header style="padding-top:30px"> 
+    <body> 
+        <!--Header_section-->         
+        <header id="header_outer"> 
             <div class="container"> 
                 <div class="header_section"> 
                     <div class="logo">
                         <a href="javascript:void(0)">
-                            <img src="http://127.0.0.1/printpbw/assets/img/logob.png" alt="">
+                           <img src="http://127.0.0.1/printpbw/assets/img/logob.png" alt="">
                         </a>
                     </div>                     
                     <nav class="nav" id="nav"> 
                         <ul> 
                             <li>
-                                <a href="<?php echo site_url('display/index')?>">Home</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('user/showDashboard1')?>">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('user/logout')?>">Log Out</a>
+                                <a href="<?php echo site_url('admin/logout')?>">Log Out</a>
                             </li>                             
                         </ul>                         
                     </nav>                     
@@ -85,53 +79,41 @@ function resizeText() {
             <div class="container" style="padding:20px;">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h2>Hello <?php echo $this->session->userdata('nama')?>!</h2>
-                        <h3></h3>
-                        <h3>Apa yang ingin anda cetak hari ini ?</h3> 
+                        <h2>Hello <?php echo $this->session->userdata('username')?>!</h2>
                     </div>
                 </div>
                 <div class="row" style="padding:50px">
-                    <div class="col-md-6 text-left">
-                       <h3>UPDATE DATA USER ORDER</h3> 
-                        <p><br></p>
-                        <?php $csrf = array(
-                                'name' => $this->security->get_csrf_token_name(),
-                                'hash' => $this->security->get_csrf_hash()
-                        );?>
-                        <form role="form" method="post" action="<?php echo site_url('admin/userupdate')?>" enctype="multipart/form-data">
-                        <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-                            <div class="form-group"> 
-                                <label class="control-label" for="formInput57">Nama</label>
-                                <input type="text" class="form-control" id="nama" placeholder="nama" required name="nama" value="<?php echo $nama?>" readonly>
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="formInput57">Email</label>
-                                <input type="text" class="form-control" id="email" placeholder="email" required name="email" value="<?php echo $email?>" readonly>
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="formInput57">Nomor Handphone</label>
-                                <input type="text" class="form-control" id="nohandphone" placeholder="nohandphone" required name="nohandphone" value="<?php echo $nohandphone?>" readonly>
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="formInput57">Password</label>
-                                <input type="text" class="form-control" id="password" placeholder="password" required name="password" value="<?php echo $password?>" readonly>
-                            </div>                            
-                            <div class="form-group"> 
-                                <label class="control-label" for="formInput57">Authentication</label>
-                                <input type="text" class="form-control" id="authentication" placeholder="authentication" required name="authentication" value="<?php echo $authentication?>">
-                            </div>                                                 
-                            <button type="submit" class="btn" name="submit" value="Submit">Submit</button>
-
-                             
-                        </form>
+                    <div class="col-md-6 text-center">
+                        <h3>Data User</h3> 
+                        <p>Menu untuk data user</p>
+                        <a href="<?php echo site_url('admin/readData')?>">
+                            <img src="https://image.flaticon.com/icons/svg/201/201579.svg" width="30%" class="img-thumbnail text-center" /> 
+                        </a>
                     </div>
-                    <div class="col-md-6">
-                        <img src="http://www.mycareerworks.org/wp-content/uploads/2017/04/businesswoman.png" /> 
+                    <div class="col-md-6 text-center">
+                        <h3>Data Transaksi</h3> 
+                        <p>Menu untuk melihat histori</p>
+                        <a href="<?php echo site_url('admin/dataHistory')?>">
+                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h3>Data Admin</h3> 
+                        <p>Menu untuk data admin</p>
+                        <a href="<?php echo site_url('admin/dataAdmin')?>">
+                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h3>Tambah Admin</h3> 
+                        <p>Menu untuk menambah admin</p>
+                        <a href="<?php echo site_url('admin/tambahAdmin')?>">
+                            <img src="https://image.flaticon.com/icons/svg/387/387615.svg" class="img-responsive img-thumbnail" width="30%" />
+                        </a>
                     </div>
                 </div>
             </div>             
         </header>         
-        <!--Header_section-->                  
         <!--Header_section-->         
         <!--Top_content-->         
         <!--Top_content-->         

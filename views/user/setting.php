@@ -3,7 +3,7 @@
     <head> 
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, maximum-scale=1"> 
-        <title>Print-in - Register</title>         
+        <title>Print-in - Setting Account</title>         
         <link rel="icon" href="favicon.png" type="image/png"> 
         <link href="<?php echo base_url ('assets/css/bootstrap.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/style.css') ?>" rel="stylesheet" type="text/css">
@@ -72,7 +72,7 @@ function resizeText() {
                                 <a href="<?php echo site_url('display/index')?>">Home</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('display/login')?>">Log In</a>
+                               <a href="<?php echo site_url('user/showDashboard1')?>">Dashboard</a>
                             </li>                             
                         </ul>                         
                     </nav>                     
@@ -85,34 +85,26 @@ function resizeText() {
 </div>
                     <div class="col-md-4 text-center">
                         <div class="page-header"> 
-                            <h1>Daftar Baru</h1> 
+                            <h1>Ubah Password</h1> 
                         </div>
                         <?php $csrf = array(
                                 'name' => $this->security->get_csrf_token_name(),
                                 'hash' => $this->security->get_csrf_hash()
                         );?>
-                        <form role="form" method="post" action="<?php echo site_url('user/register')?>">
+                        <form role="form" method="post" action="<?php echo site_url('user/setting')?>">
                         <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" /> 
                             <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">Nama</label>                                 
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama Anda" value> 
+                                <label class="control-label" >Password Lama</label>                                 
+                                <input type="text" name="passwordlama" class="form-control" id="nama" placeholder="Masukkan password lama Anda" value> 
                             </div>
                             <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">No Handphone</label>                                 
-                                <input type="text" name="nohandphone" class="form-control" id="nama" placeholder="+62" value> 
+                                <label class="control-label" >Password Baru</label>                                 
+                                <input type="text" name="passwordbaru1" class="form-control" id="nama" placeholder="Masukkan password baru Anda" value> 
                             </div>
                             <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">Email address</label>                                 
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Masukkan email Anda"> 
-                            </div>                             
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputPassword1">Password</label>                                 
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputPassword1">Ketik ulang Password</label>                                 
-                                <input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
-                            </div>                             
+                                <label class="control-label" >Email address</label>                                 
+                                <input type="text" name="passwordbaru2" class="form-control" id="exampleInputEmail1" placeholder="Ketik ulang password baru Anda"> 
+                            </div>                                            
                             <button type="submit" name="submit" class="btn">Submit</button>                             
                         </form>                         
                     </div>
@@ -121,31 +113,7 @@ function resizeText() {
                 </div>
             </div>             
         </header>         
-        <!--Header_section-->         
-        <!--Top_content-->         
-        <!--Top_content-->         
-        <!--Service-->         
-        <!--Service-->         
-        <!--main-section-end-->         
-        <!--new_portfolio-->         
-        <!-- Portfolio -->         
-        <!--/Portfolio -->         
-        <!--new_portfolio-->         
-        <!--
-<section class="main-section paddind" id="Portfolio">
-	<div class="container">
-    	<h2>Portfolio</h2>
-    	<h6>Fresh portfolio of designs that will keep you wanting more.</h6>
-	</div>
-    
-    
-</section>   
-
--->         
-        <!--main-section client-part-end-->         
-        <!--c-logo-part-end-->         
-        <!--main-section team-end-->         
-        <!--twitter-feed-end-->         
+     
         <script type="text/javascript">
     $(document).ready(function(e) {
         $('#header_outer').scrollToFixed();

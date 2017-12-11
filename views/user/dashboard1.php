@@ -73,7 +73,7 @@ function resizeText() {
                                 <a href="<?php echo site_url('display/index')?>">Home</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('user/logout')?>">Setting</a>
+                                <a href="<?php echo site_url('user/showSetting')?>">Setting</a>
                             </li>    
                             <li>
                                 <a href="<?php echo site_url('user/logout')?>">Log Out</a>

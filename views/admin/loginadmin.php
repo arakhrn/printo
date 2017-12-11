@@ -3,22 +3,22 @@
     <head> 
         <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, maximum-scale=1"> 
-        <title>Print-in - Register</title>         
+        <title>Print-in - Log In</title>         
         <link rel="icon" href="favicon.png" type="image/png"> 
         <link href="<?php echo base_url ('assets/css/bootstrap.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/style.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/linecons.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/font-awesome.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/css/responsive.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?php echo base_url ('assets/css/animate.css') ?>" rel="stylesheet" type="text/css"> 
+        <link href="<?php echo base_url ('assets/css/animate.css') ?>" rel="stylesheet" type="text/css">
         <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,700italic,400italic,300italic,300,100italic,100,900italic' rel='stylesheet' type='text/css'> 
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,500,700,800,600,300,200' rel='stylesheet' type='text/css'> 
         <!-- =======================================================
-    Theme Name: Butterfly
-    Theme URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-======================================================= -->         
+        Theme Name: Butterfly
+        Theme URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
+        Author: BootstrapMade
+        Author URL: https://bootstrapmade.com
+        ======================================================= -->         
         <script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>         
         <script type="text/javascript" src="js/bootstrap.js"></script>         
         <script type="text/javascript" src="js/jquery-scrolltofixed.js"></script>         
@@ -27,7 +27,7 @@
         <script type="text/javascript" src="js/wow.js"></script>         
         <script type="text/javascript" src="js/classie.js"></script>         
         <script type="text/javascript">
-	$(document).ready(function(e) {
+	    $(document).ready(function(e) {
         $('.res-nav_click').click(function(){
 		$('ul.toggle').slideToggle(600)	
 			});	
@@ -63,57 +63,49 @@ function resizeText() {
                 <div class="header_section"> 
                     <div class="logo">
                         <a href="javascript:void(0)">
-                            <img src="img/logob.png" alt="">
+                           <img src="http://127.0.0.1/printpbw/assets/img/logob.png" alt="">
                         </a>
-                    </div>                     
-                    <nav class="nav" id="nav"> 
-                        <ul> 
-                            <li>
-                                <a href="<?php echo site_url('display/index')?>">Home</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('display/login')?>">Log In</a>
-                            </li>                             
-                        </ul>                         
-                    </nav>                     
+                    </div>                                          
                     <a class="res-nav_click animated wobble wow" href="javascript:void(0)"><i class="fa-bars"></i></a> 
                 </div>                 
             </div>
+            <div class="container">
+</div>
             <div class="container">
                 <div style="padding:20px;" class="text-center">
                     <div class="col-md-4"> 
 </div>
                     <div class="col-md-4 text-center">
                         <div class="page-header"> 
-                            <h1>Daftar Baru</h1> 
+                            <h1>Log In Admin</h1> 
                         </div>
                         <?php $csrf = array(
                                 'name' => $this->security->get_csrf_token_name(),
                                 'hash' => $this->security->get_csrf_hash()
                         );?>
-                        <form role="form" method="post" action="<?php echo site_url('user/register')?>">
+                        <form role="form" class="form-normal" method="post" action="<?php echo site_url('admin/login')?>">
                         <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" /> 
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">Nama</label>                                 
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama Anda" value> 
+                            <div class="form-group" style="padding-left:30px;">
+                                <label class="control-label " for="exampleInputEmail1">Username</label>                                 
+                                <div>
+                                    <input type="text" class="form-control" placeholder="Input username" name="username">
+                                </div>                                 
                             </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">No Handphone</label>                                 
-                                <input type="text" name="nohandphone" class="form-control" id="nama" placeholder="+62" value> 
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputEmail1">Email address</label>                                 
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Masukkan email Anda"> 
+                            
+                            <div class="form-group" style="padding-left:30px;"> 
+                                <label class="control-label " for="exampleInputPassword1">Password</label>                                 
+                                <div>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="pass">
+                                </div>                                 
                             </div>                             
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputPassword1">Password</label>                                 
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
-                            </div>
-                            <div class="form-group"> 
-                                <label class="control-label" for="exampleInputPassword1">Ketik ulang Password</label>                                 
-                                <input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
+                            <div class="form-group">
+
+                                <div>
+                                    <button type="submit" class="btn">Log In</button>
+                                </div>
+                                <div>
+                                </div>
                             </div>                             
-                            <button type="submit" name="submit" class="btn">Submit</button>                             
                         </form>                         
                     </div>
                     <div class="col-md-4"> 

@@ -19,6 +19,14 @@ class User_Model extends CI_Model {
 		return $query->result_array();
 	}
 
+
+	//faiq
+	function updatePassword($pass,$email){
+		$this->db->set('password', $pass);
+		$this->db->where('email', $email);
+		$this->db->update('userdata');
+	}
+//vidi
 	function getPesanan() {
 		$email = $this->session->userdata('email');
 
@@ -27,12 +35,15 @@ class User_Model extends CI_Model {
 		$this->db->from('order_masuk');
 		$query = $this->db->get();
 		return $query->result_array();
-	}
-
-	/*function getTransaction(){
-
-	}*/
-
+	}    
+    
+    function updateBatal($id){
+        $this->db->set('status', 'Batal');
+        $this->db->where('id', $id);
+        $this->db->update('order_masuk');
+    }
+    
+//vidi
 	function addUserdata($data) {
 		$this->db->insert('userdata', $data);
 		//insert $data ke tabel userdata
@@ -42,7 +53,14 @@ class User_Model extends CI_Model {
 		$this->db->insert('order_masuk', $data);
 		//insert $data ke tabel order
 	}
-	
+
+	//baru ditambah ijul
+	function confirm_payment($data, $id){ 
+		$this->db->where('id', $id);
+		$this->db->update('order_masuk', $data);
+	}
+
+
 	function login_authen($email, $password){
 		$this->db->select('*');
 		$this->db->where('email', $email);

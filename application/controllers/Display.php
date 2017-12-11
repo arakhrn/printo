@@ -6,6 +6,9 @@ class Display extends CI_Controller {
 	}
 
 	function index() {
+		// $vendor = $this->vendor->read('vendor')->result_array();
+		// $vendor['vendor'] = $vendor;
+		// $this->load->view('index');
 		$this->load->view('index');
 		$data['err_message'] = "";
 	}
@@ -20,10 +23,20 @@ class Display extends CI_Controller {
 		$data['err_message'] = "";
 	}
 
-	function loginadmin(){
-		$this->load->view('admin/loginadmin');
+	function register_success(){
+		$this->load->view('user/registersuccess');
+	}
+
+	function loginvendor(){
+		$this->load->view('vendor/loginvendor');
+		$data['err_message'] = "";
+	}
+
+	function registervendor(){
+		$this->load->view('vendor/registervendor');
 		$data['err_message'] = "";
 	}
 
 }
 ?>
+

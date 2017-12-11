@@ -88,7 +88,8 @@ function resizeText() {
                         <h2>PESANAN BERLANGSUNG</h2>
                         <h2>Hello <?php echo $this->session->userdata('nama')?>!</h2>
                         <h3></h3>
-                        <h3></h3> 
+                        <h3></h3>
+                        <label><i class="fa fa-square" aria-hidden="true" style="color:green;"></i> milik anda</label>
                     </div>
                 </div>
                 <div class="row" style="padding:50px">
@@ -102,10 +103,22 @@ function resizeText() {
                             <td><strong>Waktu</strong></td>
                             <td><strong>File</strong></td>
                             <td><strong>Status</strong></td>
+                            <td><strong>Upload Bukti</strong></td>
+                            <td><strong>Status Pembayaran</strong></td>
+                            <td><strong>Pembatalan</strong></td>
                         </thead>                         
                         <tbody>
                             <?php foreach ($data as $x) { ?>
-                            <tr>
+                            <?php 
+                                if($x['email'] == $this->session->userdata('email'))
+                                {
+                                    echo "<tr style='background-color:green;color:white;'>";
+                                }
+                                else
+                                {
+                                    echo "<tr>";
+                                }
+                            ?>
                                 <td><?= $x['tgl_order'] ?></td>
                                 <td><?= $x['ukuran_krts'] ?></td>
                                 <td><?= $x['warna'] ?></td>
@@ -114,7 +127,44 @@ function resizeText() {
                                 <td><?= $x['waktu'] ?></td>
                                 <td><?= $x['file'] ?></td>
                                 <td><?= $x['status'] ?></td>
-                            </tr>
+                                <td>
+                                    <?php 
+                                        if($x['email'] == $this->session->userdata('email'))
+                                        {
+                                            if($x['upload_Bukti'] != '')
+                                            {
+                                                echo $x['upload_Bukti'];
+                                            }
+                                            else
+                                            {
+                                                echo form_open_multipart('user/printbukti/'.$x['id']); 
+                                    ?>
+                                    <div class="form-group">
+                                        <input type="file" id="uploadBukti" name="uploadBukti" size="20" required> 
+                                    </div>
+                                    <input type="hidden" name="is_submit" value="1" /> 
+                                    <button type="submit" class="btn" name="submit" value="Submit">Submit</button>
+                                    <?php 
+                                            echo form_close();
+                                            } 
+                                        } 
+                                    ?>
+                                </td>
+                                <td><?php $x['status_pembayaran'] ?></td>
+                                <td>
+                                    <?php
+                                        if($x['email'] == $this->session->userdata('email'))
+                                        {
+                                            $link = 'user/batal/'.$x['id'];
+                                            echo form_open($link);
+                                    ?>
+                                    <button type="submit">Batal</button>
+                                    <?php 
+                                            form_close(); 
+                                        }
+                                    ?>
+                                </td>
+<!--                            </tr>-->
                             <?php } ?>
                         </tbody>
                     </table>

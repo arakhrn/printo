@@ -117,15 +117,45 @@ function resizeText() {
                             </div>
                             <div class="form-group"> 
                                 <label class="control-label" for="formInput71">Tanggal Pengambilan</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="Placeholder text" required name="tgl_ambil">
+                                <input type="date" id="tanggal" class="form-control" id="tanggal" placeholder="Placeholder text" required name="tgl_ambil" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" onchange="buka()">
                             </div>
                             <div class="form-group"> 
                                 <label class="control-label" for="exampleInputEmail1">Waktu Pengambilan</label>
-                                <select class="form-control" id="waktupengambilan" name="waktu"> 
-                                    <option value="06.00">06.00</option>
-                                    <option value="10.00">10.00</option>                     
-                                    <option value="16.00">16.00</option>
-                                    <option value="20.00">20.00</option>                                     
+                                <select class="form-control" id="waktupengambilan" name="waktu">
+                                    <?php 
+                                        if(date('h.i') > '06.00')
+                                        {
+                                            echo "<option value='06.00' disabled>06.00</option>"; 
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='06.00'>06.00</option>";
+                                        }
+                                        if(date('h.i') > '10.00')
+                                        {
+                                            echo "<option value='10.00' disabled>10.00</option>"; 
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='10.00'>10.00</option>";
+                                        }
+                                        if(date('h.i') > '16.00')
+                                        {
+                                            echo "<option value='16.00' disabled>16.00</option>"; 
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='16.00'>16.00</option>";
+                                        }
+                                        if(date('h.i') > '20.00')
+                                        {
+                                            echo "<option value='20.00' disabled>20.00</option>"; 
+                                        }
+                                        else
+                                        {
+                                            echo "<option value='20.00'>20.00</option>";
+                                        }
+                                    ?>                                   
                                 </select>                                 
                             </div>
                             <div class="form-group"> 
@@ -174,6 +204,20 @@ function resizeText() {
         <!--main-section team-end-->         
         <!--twitter-feed-end-->         
         <script type="text/javascript">
+            
+            //Faiq lihat bagian ini ya, ini dihubungkan dengan select tanggal pengambilan, javascriptnya belom bisa run padahal udah onchange()
+            function buka()
+            {
+                var date = document.getElementById('tanggal').value;
+                if(<?php echo date('Y-m-d'); ?> != date)
+                {
+                    document.getElementById('time1').disabled = false;
+                    document.getElementById('time2').disabled = false;
+                    document.getElementById('time3').disabled = false;
+                    document.getElementById('time4').disabled = false;
+                }
+            }
+            
     $(document).ready(function(e) {
         $('#header_outer').scrollToFixed();
         $('.res-nav_click').click(function(){
